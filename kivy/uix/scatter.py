@@ -458,12 +458,12 @@ class Scatter(Widget):
             self.apply_transform(Matrix().translate(dx, dy, 0))
             changed = True
 
-        if len(self._touches) == 1:
+        touches = [t for t in self._touches if t is not touch]
+        if len(touches) < 1:
             return changed
 
         # we have more than one touch... list of last known pos
-        points = [Vector(self._last_touch_pos[t]) for t in self._touches
-                  if t is not touch]
+        points = [Vector(self._last_touch_pos[t]) for t in touches]
         # add current touch last
         points.append(Vector(touch.pos))
 
@@ -623,7 +623,8 @@ class Scatter(Widget):
         # remove it from our saved touches
         if touch in self._touches and touch.grab_state:
             touch.ungrab(self)
-            del self._last_touch_pos[touch]
+            if touch in self._last_touch_pos:
+                del self._last_touch_pos[touch]
             self._touches.remove(touch)
 
         # stop propagating if its within our bounds

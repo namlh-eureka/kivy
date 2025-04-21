@@ -297,6 +297,7 @@ else:
                     Logger.info('MTD: <%s> input device disconnected' % _fn)
                     while not os.path.exists(_fn):
                         time.sleep(0.05)
+                    time.sleep(0.5)
                     # input device is back online let's recreate device
                     _device.close()
                     _device = Device(_fn)

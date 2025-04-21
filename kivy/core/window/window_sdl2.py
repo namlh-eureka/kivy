@@ -584,16 +584,16 @@ class WindowSDL(WindowBase):
                 EventLoop.quit = True
                 break
 
-            elif action in ('fingermotion', 'fingerdown', 'fingerup'):
-                # for finger, pass the raw event to SDL motion event provider
-                # XXX this is problematic. On OSX, it generates touches with 0,
-                # 0 coordinates, at the same times as mouse. But it works.
-                # We have a conflict of using either the mouse or the finger.
-                # Right now, we have no mechanism that we could use to know
-                # which is the preferred one for the application.
-                if platform in ('ios', 'android'):
-                    SDL2MotionEventProvider.q.appendleft(event)
-                pass
+            elif action in ('fingermotion'):
+                idx, x, y = args
+                self.dispatch('on_finger_move', idx, x, y)
+
+            elif action in ('fingerdown', 'fingerup'):
+                idx, x, y = args
+                eventname = 'on_finger_down'
+                if action == 'fingerup':
+                    eventname = 'on_finger_up'
+                self.dispatch(eventname, idx, x, y)
 
             elif action == 'mousemotion':
                 x, y = args

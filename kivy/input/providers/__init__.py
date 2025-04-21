@@ -13,6 +13,7 @@ from kivy.setupconfig import USE_SDL2
 
 import kivy.input.providers.tuio
 import kivy.input.providers.mouse
+import kivy.input.providers.finger
 
 platform = core_platform
 
