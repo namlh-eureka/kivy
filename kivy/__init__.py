@@ -70,7 +70,7 @@ def parse_kivy_version(version):
     last two elements may be None.
     """
     m = re.match(
-        '^([0-9]+)\\.([0-9]+)\\.([0-9]+?)(rc|a|b|\\.dev|\\.post)?([0-9]+)?$',
+        '^([0-9]+)\\.([0-9]+)\\.([0-9]+?)(\\+eureka|rc|a|b|\\.dev|\\.post)?([0-9]+)?$',
         version)
     if m is None:
         raise Exception('Revision format must be X.Y.Z[-tag]')
