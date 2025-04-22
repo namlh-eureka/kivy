@@ -123,6 +123,8 @@ install_manylinux_build_deps() {
             systemd-devel mesa-libGL-devel libxkbcommon-devel mesa-libGLES-devel \
             mesa-libEGL-devel wayland-devel wayland-protocols-devel \
             libdrm-devel mesa-libgbm-devel libsamplerate-devel
+            # this is for aarch64
+            # gstreamer1-devel
 }
 
 install_ubuntu_build_deps() {
